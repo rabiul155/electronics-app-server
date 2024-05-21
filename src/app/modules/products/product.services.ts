@@ -1,10 +1,21 @@
 import ProductType from './product.interface';
 import Product from './product.model';
 
-const getAllProduct = async () => {
+const getAllProduct = async (search: string) => {
   try {
-    const products = await Product.find();
-    return products;
+    if (search) {
+      const products = await Product.find({
+        $or: [
+          { name: { $regex: search } },
+          { category: { $regex: search } },
+          { description: { $regex: search } },
+        ],
+      });
+      return products;
+    } else {
+      const products = await Product.find();
+      return products;
+    }
   } catch (error) {
     throw error;
   }
