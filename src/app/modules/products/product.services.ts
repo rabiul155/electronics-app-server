@@ -9,6 +9,16 @@ const getAllProduct = async () => {
   }
 };
 
+const getSingleProduct = async (_id: string) => {
+  try {
+    const product = await Product.findById(_id);
+    return product;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const ProductServices = {
   getAllProduct,
+  getSingleProduct,
 };
