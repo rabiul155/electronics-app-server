@@ -1,5 +1,5 @@
 {
-  "name": "mobile-bd-server",
+  "name": "electronics-bd-server",
   "version": "1.0.0",
   "description": "It is an mobile app server api",
   "main": "server.js",
