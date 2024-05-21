@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { ProductServices } from './product.services';
+import { productValidationSchema } from './product.validation';
 
 const getAllProduct = async (req: Request, res: Response) => {
   try {
@@ -38,7 +39,29 @@ const getSingleProduct = async (req: Request, res: Response) => {
   }
 };
 
+const createProduct = async (req: Request, res: Response) => {
+  try {
+    const data = req.body;
+    console.log(data);
+    productValidationSchema.parse(data);
+    const product = await ProductServices.createProduct(data);
+    res.status(201).json({
+      success: true,
+      message: 'Products created successfully!',
+      data: product,
+    });
+  } catch (error: any) {
+    console.error('Error creating product:', error);
+    res.status(400).json({
+      success: false,
+      message: 'Fail to create product',
+      error: error,
+    });
+  }
+};
+
 export const ProductController = {
   getAllProduct,
   getSingleProduct,
+  createProduct,
 };

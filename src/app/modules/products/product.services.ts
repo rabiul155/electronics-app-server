@@ -1,3 +1,4 @@
+import ProductType from './product.interface';
 import Product from './product.model';
 
 const getAllProduct = async () => {
@@ -18,7 +19,17 @@ const getSingleProduct = async (_id: string) => {
   }
 };
 
+const createProduct = async (data: ProductType) => {
+  try {
+    const product = await Product.create(data);
+    return product;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const ProductServices = {
   getAllProduct,
   getSingleProduct,
+  createProduct,
 };
