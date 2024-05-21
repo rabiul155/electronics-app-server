@@ -37,9 +37,20 @@ const deleteProduct = async (_id: string) => {
   }
 };
 
+const updateProduct = async (_id: string, data: ProductType) => {
+  try {
+    const product = await Product.findByIdAndUpdate(_id, data, { new: true });
+    console.log({ product });
+    return product;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const ProductServices = {
   getAllProduct,
   getSingleProduct,
   createProduct,
   deleteProduct,
+  updateProduct,
 };
