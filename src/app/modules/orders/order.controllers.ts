@@ -22,6 +22,26 @@ const createOrder = async (req: Request, res: Response) => {
   }
 };
 
+const getOrders = async (req: Request, res: Response) => {
+  try {
+    const email = req.query.email as string;
+    const product = await orderServices.getOrder(email);
+    res.status(200).json({
+      success: true,
+      message: 'Order get successfully!',
+      data: product,
+    });
+  } catch (error: any) {
+    console.error('Error finding order:', error);
+    res.status(400).json({
+      success: false,
+      message: 'Fail to find order',
+      error: error,
+    });
+  }
+};
+
 export const orderController = {
   createOrder,
+  getOrders,
 };

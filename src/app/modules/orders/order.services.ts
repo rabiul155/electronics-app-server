@@ -10,6 +10,21 @@ const createOrder = async (data: OrderType) => {
   }
 };
 
+const getOrder = async (email: string) => {
+  try {
+    if (email) {
+      const order = await Order.find({ email });
+      return order;
+    } else {
+      const order = await Order.find();
+      return order;
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const orderServices = {
   createOrder,
+  getOrder,
 };
