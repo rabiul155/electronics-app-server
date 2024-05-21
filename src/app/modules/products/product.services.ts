@@ -28,8 +28,18 @@ const createProduct = async (data: ProductType) => {
   }
 };
 
+const deleteProduct = async (_id: string) => {
+  try {
+    const product = await Product.findByIdAndDelete(_id);
+    return product;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const ProductServices = {
   getAllProduct,
   getSingleProduct,
   createProduct,
+  deleteProduct,
 };
