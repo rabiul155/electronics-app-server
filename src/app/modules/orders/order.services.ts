@@ -35,12 +35,16 @@ const createOrder = async (data: OrderType) => {
 
 const getOrder = async (email: string) => {
   try {
+    let orders;
     if (email) {
-      const order = await Order.find({ email });
-      return order;
+      orders = await Order.find({ email });
     } else {
-      const order = await Order.find();
-      return order;
+      orders = await Order.find();
+    }
+    if (orders.length > 0) {
+      return orders;
+    } else {
+      throw new Error('Order not found');
     }
   } catch (error) {
     throw error;

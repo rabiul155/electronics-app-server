@@ -14,9 +14,12 @@ app.use(cors());
 app.use('/api/products', productRoute);
 app.use('/api/orders', orderRoute);
 
-//base route for testing
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello form mobile app server');
+//Not found route handle
+app.all('*', (req, res) => {
+  res.status(400).json({
+    success: false,
+    message: 'Route not found',
+  });
 });
 
 export default app;

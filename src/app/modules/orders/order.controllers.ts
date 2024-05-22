@@ -16,8 +16,8 @@ const createOrder = async (req: Request, res: Response) => {
     console.error('Error creating order:', error);
     res.status(400).json({
       success: false,
-      message: 'Fail to create order',
-      error: error.message,
+      message: error.message || 'Fail to create order',
+      error: error,
     });
   }
 };
@@ -37,8 +37,8 @@ const getOrders = async (req: Request, res: Response) => {
     console.error('Error finding order:', error);
     res.status(400).json({
       success: false,
-      message: 'Fail to find order',
-      error: error.message,
+      message: error.message || 'Fail to find order',
+      error: error,
     });
   }
 };
