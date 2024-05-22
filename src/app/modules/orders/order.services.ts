@@ -1,4 +1,3 @@
-import ProductType from '../products/product.interface';
 import { productServices } from '../products/product.services';
 import OrderType from './order.interface';
 import Order from './order.model';

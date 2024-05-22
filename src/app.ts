@@ -15,7 +15,7 @@ app.use('/api/products', productRoute);
 app.use('/api/orders', orderRoute);
 
 //Not found route handle
-app.all('*', (req, res) => {
+app.all('*', (req: Request, res: Response) => {
   res.status(400).json({
     success: false,
     message: 'Route not found',
