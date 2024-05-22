@@ -14,6 +14,11 @@ app.use(cors());
 app.use('/api/products', productRoute);
 app.use('/api/orders', orderRoute);
 
+//Testing route
+app.get('/', (req: Request, res: Response) => {
+  res.send('Hello from server');
+});
+
 //Not found route handle
 app.all('*', (req: Request, res: Response) => {
   res.status(400).json({
