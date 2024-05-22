@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
-import { ProductServices } from './product.services';
+import { productServices } from './product.services';
 import { productValidationSchema } from './product.validation';
 
 const getAllProduct = async (req: Request, res: Response) => {
   try {
     const search = req.query.searchTerm as string;
-    const products = await ProductServices.getAllProduct(search);
+    const products = await productServices.getAllProduct(search);
     res.status(200).json({
       success: true,
       message: search
@@ -26,10 +26,10 @@ const getAllProduct = async (req: Request, res: Response) => {
 const getSingleProduct = async (req: Request, res: Response) => {
   try {
     const _id = req.params.productId;
-    const product = await ProductServices.getSingleProduct(_id);
+    const product = await productServices.getSingleProduct(_id);
     res.status(200).json({
       success: true,
-      message: 'Products fetched successfully!',
+      message: 'Product fetched successfully!',
       data: product,
     });
   } catch (error: any) {
@@ -45,9 +45,8 @@ const getSingleProduct = async (req: Request, res: Response) => {
 const createProduct = async (req: Request, res: Response) => {
   try {
     const data = req.body;
-    console.log(data);
     productValidationSchema.parse(data);
-    const product = await ProductServices.createProduct(data);
+    const product = await productServices.createProduct(data);
     res.status(201).json({
       success: true,
       message: 'Products created successfully!',
@@ -58,7 +57,7 @@ const createProduct = async (req: Request, res: Response) => {
     res.status(400).json({
       success: false,
       message: 'Fail to create product',
-      error: error,
+      error: error.message,
     });
   }
 };
@@ -66,10 +65,10 @@ const createProduct = async (req: Request, res: Response) => {
 const deleteProduct = async (req: Request, res: Response) => {
   try {
     const _id = req.params.productId;
-    const product = await ProductServices.deleteProduct(_id);
+    const product = await productServices.deleteProduct(_id);
     res.status(200).json({
       success: true,
-      message: 'Products deleted successfully!',
+      message: 'Product deleted successfully!',
       data: null,
     });
   } catch (error: any) {
@@ -87,10 +86,10 @@ const updateProduct = async (req: Request, res: Response) => {
     const _id = req.params.productId;
     const data = req.body;
     productValidationSchema.parse(data);
-    const product = await ProductServices.updateProduct(_id, data);
+    const product = await productServices.updateProduct(_id, data);
     res.status(200).json({
       success: true,
-      message: 'Products updated successfully!',
+      message: 'Product updated successfully!',
       data: product,
     });
   } catch (error: any) {
@@ -103,7 +102,7 @@ const updateProduct = async (req: Request, res: Response) => {
   }
 };
 
-export const ProductController = {
+export const productController = {
   getAllProduct,
   getSingleProduct,
   createProduct,

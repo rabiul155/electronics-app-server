@@ -8,4 +8,4 @@ router
   .get(orderController.getOrders)
   .post(orderController.createOrder);
 
-export const OrderRoute = router;
+export const orderRoute = router;

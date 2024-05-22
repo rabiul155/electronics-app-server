@@ -1,8 +1,8 @@
 import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 
-import { ProductRoute } from './app/modules/products/product.routes';
-import { OrderRoute } from './app/modules/orders/order.routes';
+import { productRoute } from './app/modules/products/product.routes';
+import { orderRoute } from './app/modules/orders/order.routes';
 
 const app: Application = express();
 
@@ -11,8 +11,8 @@ app.use(express.json());
 app.use(cors());
 
 //route handler
-app.use('/api/products', ProductRoute);
-app.use('/api/orders', OrderRoute);
+app.use('/api/products', productRoute);
+app.use('/api/orders', orderRoute);
 
 //base route for testing
 app.get('/', (req: Request, res: Response) => {

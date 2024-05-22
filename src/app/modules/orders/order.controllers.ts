@@ -17,7 +17,7 @@ const createOrder = async (req: Request, res: Response) => {
     res.status(400).json({
       success: false,
       message: 'Fail to create order',
-      error: error,
+      error: error.message,
     });
   }
 };
@@ -28,7 +28,9 @@ const getOrders = async (req: Request, res: Response) => {
     const product = await orderServices.getOrder(email);
     res.status(200).json({
       success: true,
-      message: 'Order get successfully!',
+      message: email
+        ? 'Orders fetched successfully for user email!'
+        : 'Orders fetched successfully!',
       data: product,
     });
   } catch (error: any) {
@@ -36,7 +38,7 @@ const getOrders = async (req: Request, res: Response) => {
     res.status(400).json({
       success: false,
       message: 'Fail to find order',
-      error: error,
+      error: error.message,
     });
   }
 };

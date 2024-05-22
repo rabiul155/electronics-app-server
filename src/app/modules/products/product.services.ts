@@ -1,4 +1,4 @@
-import ProductType from './product.interface';
+import ProductType, { InventoryType } from './product.interface';
 import Product from './product.model';
 
 const getAllProduct = async (search: string) => {
@@ -51,17 +51,35 @@ const deleteProduct = async (_id: string) => {
 const updateProduct = async (_id: string, data: ProductType) => {
   try {
     const product = await Product.findByIdAndUpdate(_id, data, { new: true });
-    console.log({ product });
     return product;
   } catch (error) {
     throw error;
   }
 };
 
-export const ProductServices = {
+const updateProductInventory = async (_id: string, data: InventoryType) => {
+  try {
+    const product = await Product.findByIdAndUpdate(
+      _id,
+      {
+        $set: {
+          'inventory.quantity': data.quantity,
+          'inventory.inStock': data.inStock,
+        },
+      },
+      { new: true },
+    );
+    return product;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const productServices = {
   getAllProduct,
   getSingleProduct,
   createProduct,
   deleteProduct,
   updateProduct,
+  updateProductInventory,
 };
